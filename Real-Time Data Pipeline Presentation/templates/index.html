@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
+       integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A=="
+       crossorigin=""/>
+     <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"
+       integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="
+       crossorigin=""></script>
+       
+     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+    <title>Kafka/Python Demonstration</title>
+  </head>
+  <body>
+  <title>Real Time Data Analytics</title>
+  </head>
+  <body>
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <a class="navbar-brand" href="#">Agenda</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item active">
+                    <a class="nav-link" href="/">Introduction<span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link" href="/model">The Basic Model<span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link" href="/iot">IoT/EC7<span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link" href="/demo">Demo<span class="sr-only">(current)</span></a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+</div>
+
+    <div class="container-fluid mw-100">
+  <h1 class ="text-center"> London Bus Live Map </h1>
+    <div id="mapid" style = "width:1225px; height:580px"></div> 
+  <p class="lead"></p>
+</div>
+
+<div class = "container text-center">    
+    <h1>References and Additional Resources</h1>
+    <div class="card-group">
+  <div class="card">
+    <div class="embed-responsive embed-responsive-16by9">
+      <iframe class="embed-responsive-item" src="https://infonomics-society.org/wp-content/uploads/ijicr/published-papers/volume-9-2018/Internet-of-Things-State-of-the-art-Challenges-Applications-and-Open-Issues.pdf" allowfullscreen></iframe>
+    </div>
+    <div class="card-body">
+      <h5 class="card-title">Internet of Things: State-of-the-art, Challenges, Applications, and Open Issues</h5>
+      <p class="card-text">Hany F. Atlam1,2*, Robert J. Walters1
+, Gary B. Wills1
+1University of Southampton, Southampton, 2Menoufia University, Menoufia, Egypt</p>
+    </div>
+  </div>
+  <div class="card">
+    <div class="embed-responsive embed-responsive-16by9">
+      <iframe class="embed-responsive-item" src="https://arxiv.org/pdf/1911.07449.pdf" allowfullscreen></iframe>
+    </div>
+    <div class="card-body">
+      <h5 class="card-title">Understanding Open Source Serverless Platforms: Design Considerations and Performance</h5>
+      <p class="card-text">Junfeng Li1,2
+, Sameer G. Kulkarni2
+, K. K. Ramakrishnan2
+, and Dan Li1
+1Tsinghua University 2University of California, Riverside</p>
+    </div>
+  </div>
+  <div class="card">
+    <div class="embed-responsive embed-responsive-16by9">
+      <iframe class="embed-responsive-item" src="https://bisite.usal.es/archivos/non_intrusive_load_monitoring_nilm.pdf" allowfullscreen></iframe>
+    </div>
+    <div class="card-body">
+      <h5 class="card-title">Non Instrusive Load Monitoring (NILM): A State of the Art</h5>
+      <p class="card-text">Jorge Revuelta Herrero1(B)
+, Alvaro Lozano Murciego ´ 1,
+Alberto L´opez Barriuso1, Daniel Hern´andez de la Iglesia1,
+Gabriel Villarrubia Gonz´alez1, Juan Manuel Corchado Rodr´ıguez1,
+and Rita Carreira2</p>
+    </div>
+  </div>
+</div>
+</div>
+    
+    
+    
+    
+    <script>
+      var mymap = L.map('mapid').setView([51.505, -0.09], 13);
+      
+      L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}', {
+        attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
+        maxZoom: 18,
+        id: 'mapbox/streets-v11',
+        tileSize: 512,
+        zoomOffset: -1,
+        accessToken: 'pk.eyJ1Ijoic3NoZW4iLCJhIjoiY2tmMmVueTIxMXc4ajMzbWZlZHA2eGN1ciJ9.GeSIXehUFtJlkdgBRc8Ocw'
+      }).addTo(mymap);
+      
+      
+      mapMarkers1 = [];
+      mapMarkers2 = [];
+      mapMarkers3 = [];
+      
+      var source = new EventSource('/topic/test_1');
+      source.addEventListener('message', function(e){
+          
+          console.log('Message');
+          console.log(e.data)
+          obj = JSON.parse(e.data);
+          console.log(obj);
+          console.log(obj.longtitude)
+
+          if(obj.busline == '00001') {
+             for (var i = 0; i < mapMarkers1.length; i++) {
+                mymap.removeLayer(mapMarkers1[i]);
+              }
+              
+              marker1 = L.marker([obj.latitude, obj.longtitude]).addTo(mymap);
+              mapMarkers1.push(marker1);
+          }
+          
+          if(obj.busline == '00002') {
+             for (var i = 0; i < mapMarkers2.length; i++) {
+                mymap.removeLayer(mapMarkers2[i]);
+              }
+              marker2 = L.marker([obj.latitude, obj.longtitude]).addTo(mymap);
+              mapMarkers2.push(marker2);
+          }
+          
+          if(obj.busline == '00003') {
+             for (var i = 0; i < mapMarkers3.length; i++) {
+                mymap.removeLayer(mapMarkers3[i]);
+              }
+              marker3 = L.marker([obj.latitude, obj.longtitude]).addTo(mymap);
+              mapMarkers3.push(marker3);
+          }
+
+      },false);      
+    </script>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
+  </body>
+</html>
